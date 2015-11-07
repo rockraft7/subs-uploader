@@ -13,13 +13,18 @@ set_error_handler("customError");
 $logs = array();
 function info($message) {
     global $logs;
-    array_push($logs, getdate().":".$message);
+    array_push($logs, (date('m/d/Y h:i:s a', time()).":".$message));
 }
 
 $media_extensions = array("mp4", "mkv", "avi");
 $root_directory = "/home/rtorrent/TV";
 
 $series_list = array();
+
+info("Hello!!!");
+info("Hello!!!");
+info("Hello!!!");
+info("Hello!!!");
 
 $list = scandir($root_directory);
 foreach($list as $series) {
@@ -127,13 +132,12 @@ if (count($series_list) == 0) {
             </table>
             <code>Found <?php echo count($series_list); ?> series.</code>
         </div>
-        <p>
+        <br />
             <?php 
 foreach($logs as $log) {
-    echo "<code>$log</code>";
+    echo "<p class=\"bg-info\">$log</p>\n";
 }
             ?>
-        </p>
     </div>
 </body>
 
