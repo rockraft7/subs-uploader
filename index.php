@@ -25,6 +25,7 @@ $list = scandir($root_directory);
 foreach($list as $series) {
     if (is_dir($root_directory."/".$series) && ($series != ".") && ($series != "..")) {
         info("Scanning directory ".$root_directory."/".$series);
+        $media_files = array();
         array_push($media_files, scanForVideoFile($root_directory."/".$series));
         info("Media found: ".count($media_files));
         $series_list[$series] = $media_files;
