@@ -104,13 +104,12 @@ foreach($series as $key) {
                     </tr>
     <?php
     foreach($episode_list[0] as $episode) {
-        print_r($episode);
 ?>
                     <tr>
                         <td>
-                            <input type="radio" name="file" value="<?php echo $episode; ?>" />
+                            <input type="radio" name="file" value="<?php echo $episode[0]; ?>" />
                         </td>
-                        <td><?php echo $episode; ?></td>
+                        <td><?php echo $episode[0]; ?></td>
                     </tr>
                     <?php
     }
