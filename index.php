@@ -97,20 +97,20 @@ if (isset($errors)) {
 $series = array_keys($series_list);
 foreach($series as $key) {
     $episode_list = $series_list[$key];
-    $episode_size = count($episode_list);
     ?>
                     <tr>
                         <td>-</td>
-                        <td colspan="2" rowspan="<?php echo $episode_size; ?>"><?php echo $key; ?></td>
+                        <td colspan="2" rowspan="<?php echo count($episode_list); ?>"><?php echo $key; ?></td>
                     </tr>
     <?php
     foreach($episode_list as $episode) {
+        print_r($episode);
 ?>
                     <tr>
                         <td>
                             <input type="radio" name="file" value="<?php echo $episode; ?>" />
                         </td>
-                        <td>$episode</td>
+                        <td><?php echo $episode; ?></td>
                     </tr>
                     <?php
     }
