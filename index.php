@@ -97,18 +97,13 @@ if (isset($errors)) {
 $series = array_keys($series_list);
 foreach($series as $key) {
     $episode_list = $series_list[$key];
-    ?>
-                    <tr>
-                        <td>-</td>
-                        <td colspan="2" rowspan="<?php echo count($episode_list[0]); ?>"><?php echo $key; ?></td>
-                    </tr>
-    <?php
     foreach($episode_list[0] as $episode) {
 ?>
                     <tr>
                         <td>
                             <input type="radio" name="file" value="<?php echo $episode[0]; ?>" />
                         </td>
+                        <td><?php echo $key; ?></td>
                         <td><?php echo $episode[0]; ?></td>
                     </tr>
                     <?php
