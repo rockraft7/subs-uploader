@@ -104,6 +104,7 @@ foreach($series as $key) {
                     </tr>
     <?php
     foreach($episode_list[0] as $episode) {
+        print_r($episode);
 ?>
                     <tr>
                         <td>
