@@ -25,17 +25,14 @@ $list = scandir($root_directory);
 foreach($list as $series) {
     if (is_dir($root_directory."/".$series) && ($series != ".") && ($series != "..")) {
         info("Scanning directory ".$root_directory."/".$series);
-        $media_files = NULL;
-        scanForVideoFile($root_directory."/".$series,$media_files);
+        array_push($media_files, scanForVideoFile($root_directory."/".$series));
         info("Media found: ".count($media_files));
         $series_list[$series] = $media_files;
     }
 }
 
-function scanForVideoFile($dir, $media_files) { 
-    if (!isset($media_files)) {
-        $media_files = array();
-    }
+function scanForVideoFile($dir) { 
+    $media_files = array();
     
     $list = scandir($dir); 
     foreach($list as $file) { 
@@ -43,13 +40,15 @@ function scanForVideoFile($dir, $media_files) {
         clearstatcache(); 
         if (is_dir($dir."/".$file) && ($file != ".") && ($file != "..")) { 
             info("Scanning for $dir/$file");
-            scanForVideoFile($dir."/".$file, $media_files); 
+            array_push($media_files, scanForVideoFile($dir."/".$file)); 
         } else if (in_array($ext, $GLOBALS["media_extensions"])) { 
             $pathname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $dir."/".$file);
             info("Putting $pathname");
             array_push($media_files, $pathname); 
         } 
     }
+    
+    return $media_files;
 }
 
 ?>
