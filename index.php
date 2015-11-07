@@ -100,11 +100,10 @@ foreach($series as $key) {
     ?>
                     <tr>
                         <td>-</td>
-                        <td colspan="2" rowspan="<?php echo count($episode_list); ?>"><?php echo $key; ?></td>
+                        <td colspan="2" rowspan="<?php echo count($episode_list[0]); ?>"><?php echo $key; ?></td>
                     </tr>
     <?php
-    foreach($episode_list as $episode) {
-        print_r($episode);
+    foreach($episode_list[0] as $episode) {
 ?>
                     <tr>
                         <td>
