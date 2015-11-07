@@ -3,10 +3,10 @@ error_reporting(E_ALL);
 //ini_set('display_errors',1);
 $errors = array();
 
-function customError($errno, $errstr) {
+function customError($error_level,$error_message,$error_file,$error_line,$error_context) {
     global $errors;
     
-    array_push($errors, $errstr);
+    array_push($errors, "Line ".$error_line." - ".$error_message);
 }
 set_error_handler("customError");
 
