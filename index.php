@@ -110,6 +110,7 @@ if (count($series_list) == 0) {
                     ?>
                 </tbody>
             </table>
+            <code>Found <?php echo count($series_list); ?> series.</code>
         </div>
     </div>
 </body>
