@@ -36,6 +36,7 @@ function scanForVideoFile($dir, $media_files) {
         if (is_dir($dir."/".$file) && ($file != ".") && ($file != "..")) { 
             scanForVideoFile($dir."/".$file, $media_files); 
         } else if (in_array($ext, $GLOBALS["media_extensions"])) { 
+            $pathname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $dir."/".$file);	
             array_push($media_files, $pathname); 
         } 
     }
