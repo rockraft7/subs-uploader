@@ -21,17 +21,13 @@ $root_directory = "/home/rtorrent/TV";
 
 $series_list = array();
 
-info("Hello!!!");
-info("Hello!!!");
-info("Hello!!!");
-info("Hello!!!");
-
 $list = scandir($root_directory);
 foreach($list as $series) {
     if (is_dir($root_directory."/".$series) && ($series != ".") && ($series != "..")) {
         info("Scanning directory ".$root_directory."/".$series);
         $media_files = NULL;
         scanForVideoFile($root_directory."/".$series,$media_files);
+        info("Media found: ".count($media_files));
         $series_list[$series] = $media_files;
     }
 }
