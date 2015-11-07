@@ -10,6 +10,12 @@ function customError($error_level,$error_message,$error_file,$error_line,$error_
 }
 set_error_handler("customError");
 
+$logs = array();
+function info($message) {
+    global $logs;
+    array_push($logs, getdate().":".$message);
+}
+
 $media_extensions = array("mp4", "mkv", "avi");
 $root_directory = "/home/rtorrent/TV";
 
@@ -18,6 +24,7 @@ $series_list = array();
 $list = scandir($root_directory);
 foreach($list as $series) {
     if (is_dir($root_directory."/".$series) && ($series != ".") && ($series != "..")) {
+        info("Scanning directory ".$root_directory."/".$series);
         $media_files = NULL;
         scanForVideoFile($root_directory."/".$series,$media_files);
         $series_list[$series] = $media_files;
@@ -34,9 +41,11 @@ function scanForVideoFile($dir, $media_files) {
         $ext = pathinfo($dir."/".$file, PATHINFO_EXTENSION); 
         clearstatcache(); 
         if (is_dir($dir."/".$file) && ($file != ".") && ($file != "..")) { 
+            info("Scanning for $dir/$file");
             scanForVideoFile($dir."/".$file, $media_files); 
         } else if (in_array($ext, $GLOBALS["media_extensions"])) { 
-            $pathname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $dir."/".$file);	
+            $pathname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $dir."/".$file);
+            info("Putting $pathname");
             array_push($media_files, $pathname); 
         } 
     }
@@ -118,6 +127,13 @@ if (count($series_list) == 0) {
             </table>
             <code>Found <?php echo count($series_list); ?> series.</code>
         </div>
+        <p>
+            <?php 
+foreach($logs as $log) {
+    echo "<code>$log</code>";
+}
+            ?>
+        </p>
     </div>
 </body>
 
